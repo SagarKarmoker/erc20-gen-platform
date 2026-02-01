@@ -59,6 +59,7 @@ export const useFactory = () => {
           featureFlags,
           ownerAddress,
         ],
+        gas: BigInt(5000000), // Set gas limit to 5M (well below the 16.7M cap)
       });
 
       return hash || null;

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAccount } from 'wagmi';
 import { useFactory } from '../hooks/useFactory';
 import { TokenInfo } from '../types';
 import { Link } from 'react-router-dom';
-import { Loader2, Coins, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { Loader2, Coins, ExternalLink, ArrowUpRight, Wallet } from 'lucide-react';
 import { formatAddress } from '../utils/constants';
 
 export const MyTokens: React.FC = () => {
   const { address, isConnected } = useAccount();
   const { getTokensByOwner } = useFactory();
-  const [tokens, setTokens] = useState<TokenInfo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [tokens, setTokens] = React.useState<TokenInfo[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (address) {
       loadTokens();
     }
@@ -33,122 +33,135 @@ export const MyTokens: React.FC = () => {
 
   if (!isConnected) {
     return (
-      <div className="max-w-4xl mx-auto text-center py-16">
-        <Coins className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          Connect Your Wallet
-        </h2>
-        <p className="text-gray-600">
-          Please connect your wallet to view your created tokens
-        </p>
+      <div className="section-container py-16 text-center">
+        <div className="mx-auto max-w-4xl">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-theme-secondary">
+            <Wallet className="h-8 w-8 text-theme-muted" />
+          </div>
+          <h2 className="mb-4 text-2xl font-bold text-theme-primary">
+            Connect Your Wallet
+          </h2>
+          <p className="text-theme-secondary">
+            Please connect your wallet to view your created tokens
+          </p>
+        </div>
       </div>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="max-w-4xl mx-auto text-center py-16">
-        <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-4" />
-        <p className="text-gray-600">Loading your tokens...</p>
+      <div className="section-container py-16 text-center">
+        <div className="mx-auto max-w-4xl">
+          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-primary-500" />
+          <p className="text-theme-secondary">Loading your tokens...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">My Tokens</h1>
-        <p className="text-gray-600 mt-2">
-          Manage and view all tokens you have created
-        </p>
-      </div>
-
-      {tokens.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
-          <Coins className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No Tokens Yet
-          </h3>
-          <p className="text-gray-600 mb-6">
-            You haven't created any tokens yet. Start by creating your first ERC20 token!
+    <div className="section-container py-12">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-8">
+          <span className="mb-2 inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400">
+            Your Collection
+          </span>
+          <h1 className="mb-2 text-3xl font-bold text-theme-primary sm:text-4xl">My Tokens</h1>
+          <p className="text-lg text-theme-secondary">
+            Manage and view all tokens you have created
           </p>
-          <Link
-            to="/create"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Create Your First Token
-            <ArrowUpRight className="w-4 h-4 ml-2" />
-          </Link>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tokens.map((token) => (
-            <div
-              key={token.address}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <span className="text-xl font-bold text-blue-600">
-                    {token.symbol.charAt(0)}
-                  </span>
-                </div>
-                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                  ERC20
-                </span>
-              </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                {token.name}
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">{token.symbol}</p>
-
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Address</span>
-                  <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded">
-                    {formatAddress(token.address)}
-                  </code>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Supply</span>
-                  <span className="font-medium">{token.totalSupply}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Created</span>
-                  <span className="font-medium">
-                    {new Date(token.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                {token.features.slice(0, 3).map((feature) => (
-                  <span
-                    key={feature}
-                    className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded"
-                  >
-                    {feature}
-                  </span>
-                ))}
-                {token.features.length > 3 && (
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                    +{token.features.length - 3} more
-                  </span>
-                )}
-              </div>
-
-              <Link
-                to={`/token/${token.address}`}
-                className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                View Details
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Link>
+        {tokens.length === 0 ? (
+          <div className="rounded-2xl border border-theme-primary bg-theme-card p-12 text-center">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-theme-secondary">
+              <Coins className="h-8 w-8 text-theme-muted" />
             </div>
-          ))}
-        </div>
-      )}
+            <h3 className="mb-2 text-xl font-semibold text-theme-primary">
+              No Tokens Yet
+            </h3>
+            <p className="mx-auto mb-6 max-w-md text-theme-secondary">
+              You haven't created any tokens yet. Start by creating your first ERC20 token!
+            </p>
+            <Link
+              to="/create"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-secondary-600 px-6 py-3 font-medium text-white shadow-lg shadow-primary-500/25 transition-all hover:from-primary-500 hover:to-secondary-500"
+            >
+              Create Your First Token
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {tokens.map((token) => (
+              <div
+                key={token.address}
+                className="group rounded-2xl border border-theme-primary bg-theme-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary-300 dark:hover:border-primary-500/30"
+              >
+                <div className="mb-4 flex items-start justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500/20 to-secondary-500/20">
+                    <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
+                      {token.symbol.charAt(0)}
+                    </span>
+                  </div>
+                  <span className="rounded border border-theme-secondary bg-theme-secondary px-2 py-1 text-xs font-medium text-theme-muted">
+                    ERC20
+                  </span>
+                </div>
+
+                <h3 className="mb-1 text-lg font-semibold text-theme-primary">
+                  {token.name}
+                </h3>
+                <p className="mb-4 text-sm text-theme-muted">{token.symbol}</p>
+
+                <div className="mb-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-theme-muted">Address</span>
+                    <code className="rounded bg-theme-secondary px-2 py-1 text-xs font-mono text-theme-muted">
+                      {formatAddress(token.address)}
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-theme-muted">Supply</span>
+                    <span className="font-medium text-theme-primary">{token.totalSupply}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-theme-muted">Created</span>
+                    <span className="font-medium text-theme-secondary">
+                      {new Date(token.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {token.features.slice(0, 3).map((feature) => (
+                    <span
+                      key={feature}
+                      className="rounded border border-primary-200 bg-primary-100 px-2 py-1 text-xs text-primary-700 dark:border-primary-500/20 dark:bg-primary-500/10 dark:text-primary-400"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                  {token.features.length > 3 && (
+                    <span className="rounded bg-theme-secondary px-2 py-1 text-xs text-theme-muted">
+                      +{token.features.length - 3} more
+                    </span>
+                  )}
+                </div>
+
+                <Link
+                  to={`/token/${token.address}`}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-theme-primary px-4 py-2 font-medium text-theme-secondary transition-all hover:border-theme-secondary hover:bg-theme-secondary hover:text-theme-primary"
+                >
+                  View Details
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

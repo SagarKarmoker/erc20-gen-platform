@@ -71,12 +71,14 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Token Details</h2>
+      <div className="rounded-2xl border border-theme-primary bg-theme-card p-6">
+        <h2 className="mb-6 flex items-center gap-2 text-xl font-semibold text-theme-primary">
+          Token Details
+        </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="name" className="mb-2 block text-sm font-medium text-theme-secondary">
               Token Name *
             </label>
             <input
@@ -85,13 +87,13 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
               required
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-xl border border-theme-primary bg-theme-primary px-4 py-3 text-theme-primary placeholder-theme-muted transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500"
               placeholder="e.g., My Token"
             />
           </div>
 
           <div>
-            <label htmlFor="symbol" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="symbol" className="mb-2 block text-sm font-medium text-theme-secondary">
               Token Symbol *
             </label>
             <input
@@ -100,13 +102,13 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
               required
               value={formData.symbol}
               onChange={(e) => setFormData(prev => ({ ...prev, symbol: e.target.value.toUpperCase() }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-xl border border-theme-primary bg-theme-primary px-4 py-3 text-theme-primary placeholder-theme-muted transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500"
               placeholder="e.g., MTK"
             />
           </div>
 
           <div>
-            <label htmlFor="decimals" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="decimals" className="mb-2 block text-sm font-medium text-theme-secondary">
               Decimals
             </label>
             <input
@@ -116,12 +118,12 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
               max={18}
               value={formData.decimals}
               onChange={(e) => setFormData(prev => ({ ...prev, decimals: parseInt(e.target.value) }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-xl border border-theme-primary bg-theme-primary px-4 py-3 text-theme-primary transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500"
             />
           </div>
 
           <div>
-            <label htmlFor="initialSupply" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="initialSupply" className="mb-2 block text-sm font-medium text-theme-secondary">
               Initial Supply *
             </label>
             <input
@@ -130,14 +132,14 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
               required
               value={formData.initialSupply}
               onChange={(e) => setFormData(prev => ({ ...prev, initialSupply: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-xl border border-theme-primary bg-theme-primary px-4 py-3 text-theme-primary placeholder-theme-muted transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500"
               placeholder="e.g., 1000000"
             />
           </div>
 
           {selectedFeatures.has('capped') && (
             <div>
-              <label htmlFor="maxSupply" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="maxSupply" className="mb-2 block text-sm font-medium text-theme-secondary">
                 Maximum Supply
               </label>
               <input
@@ -145,7 +147,7 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
                 id="maxSupply"
                 value={formData.maxSupply}
                 onChange={(e) => setFormData(prev => ({ ...prev, maxSupply: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full rounded-xl border border-theme-primary bg-theme-primary px-4 py-3 text-theme-primary placeholder-theme-muted transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500"
                 placeholder="e.g., 10000000"
               />
             </div>
@@ -153,33 +155,35 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Token Features</h2>
+      <div className="rounded-2xl border border-theme-primary bg-theme-card p-6">
+        <h2 className="mb-6 flex items-center gap-2 text-xl font-semibold text-theme-primary">
+          Token Features
+        </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {TOKEN_FEATURES.map((feature) => (
             <div
               key={feature.id}
               onClick={() => handleFeatureToggle(feature.id)}
-              className={`relative p-4 rounded-lg border-2 cursor-pointer transition-all ${
+              className={`relative cursor-pointer rounded-xl border-2 p-4 transition-all ${
                 selectedFeatures.has(feature.id)
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-primary-500 bg-primary-500/10'
+                  : 'border-theme-primary hover:border-theme-secondary'
               }`}
             >
-              <div className="flex items-start space-x-3">
-                <div className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
+              <div className="flex items-start gap-3">
+                <div className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border-2 ${
                   selectedFeatures.has(feature.id)
-                    ? 'bg-blue-500 border-blue-500'
-                    : 'border-gray-300'
+                    ? 'border-primary-500 bg-primary-500'
+                    : 'border-theme-secondary'
                 }`}>
                   {selectedFeatures.has(feature.id) && (
-                    <Check className="w-3 h-3 text-white" />
+                    <Check className="h-3 w-3 text-white" />
                   )}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-sm font-medium text-gray-900">{feature.label}</h3>
-                  <p className="text-xs text-gray-500 mt-1">{feature.description}</p>
+                  <h3 className="text-sm font-medium text-theme-primary">{feature.label}</h3>
+                  <p className="mt-1 text-xs text-theme-muted">{feature.description}</p>
                 </div>
               </div>
             </div>
@@ -188,21 +192,21 @@ export const TokenForm: React.FC<TokenFormProps> = ({ onSuccess }) => {
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-sm text-red-600">{error}</p>
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-500/30 dark:bg-red-500/10">
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         </div>
       )}
 
-      <div className="flex items-center justify-end space-x-4">
+      <div className="flex items-center justify-end gap-4">
         {!address && (
-          <p className="text-sm text-gray-500">Please connect your wallet to create a token</p>
+          <p className="text-sm text-theme-muted">Please connect your wallet to create a token</p>
         )}
         <button
           type="submit"
           disabled={!address || isLoading}
-          className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-secondary-600 px-6 py-3 font-medium text-white shadow-lg shadow-primary-500/25 transition-all hover:from-primary-500 hover:to-secondary-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
           <span>{isLoading ? 'Creating...' : 'Create Token'}</span>
         </button>
       </div>

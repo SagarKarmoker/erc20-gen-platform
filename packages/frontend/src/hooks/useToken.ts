@@ -93,6 +93,7 @@ export const useToken = (tokenAddress?: string) => {
         abi: ERC20_ABI,
         functionName: 'mint',
         args: [to as `0x${string}`, parseEther(amount)],
+        gas: BigInt(200000), // 200k gas for mint
       });
     } catch (err: any) {
       setError(err.message || 'Failed to mint tokens');
@@ -113,6 +114,7 @@ export const useToken = (tokenAddress?: string) => {
         abi: ERC20_ABI,
         functionName: 'burn',
         args: [parseEther(amount)],
+        gas: BigInt(200000), // 200k gas for burn
       });
     } catch (err: any) {
       setError(err.message || 'Failed to burn tokens');
@@ -133,6 +135,7 @@ export const useToken = (tokenAddress?: string) => {
         abi: ERC20_ABI,
         functionName: 'transfer',
         args: [to as `0x${string}`, parseEther(amount)],
+        gas: BigInt(100000), // 100k gas for transfer
       });
     } catch (err: any) {
       setError(err.message || 'Failed to transfer tokens');
@@ -152,6 +155,7 @@ export const useToken = (tokenAddress?: string) => {
         address: tokenAddress as `0x${string}`,
         abi: ERC20_ABI,
         functionName: 'pause',
+        gas: BigInt(100000), // 100k gas for pause
       });
     } catch (err: any) {
       setError(err.message || 'Failed to pause token');
@@ -171,6 +175,7 @@ export const useToken = (tokenAddress?: string) => {
         address: tokenAddress as `0x${string}`,
         abi: ERC20_ABI,
         functionName: 'unpause',
+        gas: BigInt(100000), // 100k gas for unpause
       });
     } catch (err: any) {
       setError(err.message || 'Failed to unpause token');
