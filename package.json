@@ -1,0 +1,44 @@
+{
+  "name": "erc20-gen-platform",
+  "version": "1.0.0",
+  "description": "Professional ERC20 Token Generator Platform - Create and deploy custom tokens with ease",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:contracts\" \"npm run dev:frontend\"",
+    "dev:contracts": "cd packages/contracts && npm run node",
+    "dev:frontend": "cd packages/frontend && npm run dev",
+    "build": "npm run build:contracts && npm run build:frontend",
+    "build:contracts": "cd packages/contracts && npm run compile",
+    "build:frontend": "cd packages/frontend && npm run build",
+    "test": "npm run test:contracts",
+    "test:contracts": "cd packages/contracts && npm run test",
+    "deploy:local": "cd packages/contracts && npm run deploy:local",
+    "deploy:sepolia": "cd packages/contracts && npm run deploy:sepolia",
+    "lint": "npm run lint:contracts && npm run lint:frontend",
+    "lint:contracts": "cd packages/contracts && npm run lint",
+    "lint:frontend": "cd packages/frontend && npm run lint"
+  },
+  "keywords": [
+    "erc20",
+    "token",
+    "ethereum",
+    "solidity",
+    "hardhat",
+    "react",
+    "vite",
+    "wagmi",
+    "web3"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
