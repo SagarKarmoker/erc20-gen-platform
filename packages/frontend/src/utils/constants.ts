@@ -11,7 +11,7 @@ export const SUPPORTED_NETWORKS = [
   { chainId: polygonMumbai.id, name: 'Mumbai', testnet: true },
 ];
 
-export const FACTORY_ADDRESS = '0xc20ABCFb8960DcD84ed326dA117E42Fe09462c83' as `0x${string}`;
+export const FACTORY_ADDRESS = '0x05B5bc5f5391E3EA7f065C1b3B1a9C3643D33651' as `0x${string}`;
 
 export const FACTORY_ABI = [
   {

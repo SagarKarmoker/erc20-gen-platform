@@ -91,13 +91,13 @@ contract ERC20TokenFactory {
             
             // Refund excess
             if (msg.value > platformFee) {
-                (bool success, ) = msg.sender.call{value: msg.value - platformFee}("");
-                require(success, "Refund failed");
+                (bool refundSuccess, ) = msg.sender.call{value: msg.value - platformFee}("");
+                require(refundSuccess, "Refund failed");
             }
             
             // Transfer fee to recipient
-            (bool success, ) = feeRecipient.call{value: platformFee}("");
-            require(success, "Fee transfer failed");
+            (bool feeSuccess, ) = feeRecipient.call{value: platformFee}("");
+            require(feeSuccess, "Fee transfer failed");
         } else {
             // Refund any ETH sent if no fee
             if (msg.value > 0) {
