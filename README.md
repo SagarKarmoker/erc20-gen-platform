@@ -2,7 +2,7 @@
 
 A professional full-stack platform for creating and deploying custom ERC20 tokens on Ethereum and compatible networks.
 
-## 🌟 Features
+## Features
 
 - **One-Click Token Creation**: Deploy ERC20 tokens with customizable features
 - **Feature Selection**: Choose from Mintable, Burnable, Pausable, Capped, Permit (gasless), and Ownable
@@ -12,7 +12,7 @@ A professional full-stack platform for creating and deploying custom ERC20 token
 - **Factory Pattern**: Gas-efficient deployment through factory contract
 - **Automatic Verification**: Contract verification on block explorers
 
-## 🏗️ Architecture
+## Architecture
 
 ### Monorepo Structure
 ```
@@ -35,7 +35,7 @@ packages/
 - **Contracts**: Solidity 0.8.20, Hardhat, OpenZeppelin Contracts
 - **Testing**: Hardhat Network, Chai, Mocha
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -70,7 +70,7 @@ npm run dev:contracts  # Terminal 1
 npm run dev:frontend   # Terminal 2
 ```
 
-## 📋 Contract Features
+## Contract Features
 
 The platform supports creating ERC20 tokens with the following optional features:
 
@@ -83,7 +83,7 @@ The platform supports creating ERC20 tokens with the following optional features
 | **Permit** | Gasless approvals via signatures (ERC-2612) |
 | **Ownable** | Access control with single owner |
 
-## 🌐 Supported Networks
+## Supported Networks
 
 - Ethereum Mainnet
 - Sepolia Testnet
@@ -93,7 +93,7 @@ The platform supports creating ERC20 tokens with the following optional features
 - Optimism
 - Base
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### 1. Connect Wallet
 - Click "Connect Wallet" in the top right
@@ -117,7 +117,7 @@ The platform supports creating ERC20 tokens with the following optional features
 - View on block explorer
 - Copy contract addresses
 
-## 🔧 Configuration
+## Configuration
 
 ### Contracts (.env)
 ```env
@@ -132,7 +132,7 @@ VITE_FACTORY_ADDRESS=0x...
 VITE_WALLET_CONNECT_PROJECT_ID=your_project_id
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run contract tests
@@ -142,13 +142,13 @@ npm run test:contracts
 npm run test:contracts -- --coverage
 ```
 
-## 📦 Deployment
+## Deployment
 
-### ✅ Current Deployment Status
+### Current Deployment Status
 
 **Sepolia Testnet:**
 - **ERC20TokenFactory**: `0xc20ABCFb8960DcD84ed326dA117E42Fe09462c83`
-- **Status**: ✅ Deployed & Tested (31/31 tests passing)
+- **Status**: Deployed and Tested (31/31 tests passing)
 - **Gas Used**: ~4.97M gas for factory deployment
 - **Platform Fee**: 0.01 ETH
 
@@ -181,11 +181,11 @@ npm run build
 # Deploy the dist/ folder
 ```
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](./LICENSE) file
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature/amazing-feature`
@@ -193,12 +193,12 @@ MIT License - see [LICENSE](./LICENSE) file
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open Pull Request
 
-## 📞 Support
+## Support
 
 - Open an issue for bugs or feature requests
 - Join our Discord community (coming soon)
-- Email: support@example.com
+- Email: sagarkarmoker.official@gmail.com
 
 ---
 
-⚠️ **Security Notice**: Never commit private keys or API keys to the repository. Always use `.env` files which are gitignored.
+**Security Notice**: Never commit private keys or API keys to the repository. Always use `.env` files which are gitignored.
